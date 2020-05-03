@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Champ</title>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-left">
+            <div class="logo">
+                <a href="">
+                    <i class="fas fa-heading"></i>
+                    <i class="fab fa-cuttlefish"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="nav-middle">
+            <span class="weather">Weather</span>
+            <span class="champ">Champ</span>           
+        </div>
+        <div class="nav-right">
+            <a href="" target="_blank">
+                <i class="fas fa-cloud-sun-rain"></i>            
+            </a>
+           
+        </div>
+    </nav>
+
+
+    <form action="wth" id="frm"> 
+        <input type="text" placeholder="Enter Your City" name='c_name'> <br>
+        <div class="sub">
+            <a id="txt" class="cross_line" href="javascript:{}" onclick="document.getElementById('frm').submit(); return false;">
+                Search
+            </a>
+        </div>
+    </form>
+    
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+   
+</body>
+<footer>
+   
+    <p> <i class="far fa-envelope"></i> <a href="shreyashc018@gmail.com">
+        shreyashc018@gmail.com</a></p>
+  </footer>
+
+
+</html>
