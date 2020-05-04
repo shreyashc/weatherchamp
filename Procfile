@@ -1,1 +1,1 @@
-web:gunicorn weather_champ.wsgi
+web: gunicorn weather_champ.wsgi --log-file -
