@@ -20,7 +20,7 @@ requests==2.23.0
 six==1.14.0
 soupsieve==2.0
 sqlparse==0.3.1
-urllib3==1.25.8
+urllib3==1.26.5
 virtualenv==20.0.17
 virtualenv-clone==0.5.4
 whitenoise==5.0.1
