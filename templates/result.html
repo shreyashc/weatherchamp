@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'images/favicon.ico' %}"
+    />
+    <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index_styles.css' %}" />
+    <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
+    <script src="{% static 'uikit/js/uikit-icons.min.js' %}"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Champ - {{name}}</title>
+  </head>
+  <body>
+    <div>
+      <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-center">
+          <a href="{% url 'home' %}" class="uk-navbar-item uk-logo"
+            >Weather Champ</a
+          >
+        </div>
+      </nav>
+
+      <main class="uk-padding">
+        <div class="uk-container uk-container-small">
+          <div class="uk-card uk-card-default">
+            <div class="uk-card-header">
+              <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-auto">
+                  <img
+                    class="uk-border-circle"
+                    width="60"
+                    height="60"
+                    src="http://openweathermap.org/img/w/{{ icon }}.png"
+                  />
+                </div>
+                <div class="uk-width-expand">
+                  <h3 class="uk-card-title uk-margin-remove-bottom">
+                    {{name}}, {{country}}
+                  </h3>
+                  <p class="uk-text-meta uk-margin-remove-top">{{info}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="uk-card-body">
+              <ul class="uk-list uk-list-divider">
+                <li><span class="uk-text-bold">Description:</span> {{des}}</li>
+                <li>
+                  <span class="uk-text-bold"> Temperature:</span> {{temp}}
+                  &#8451;
+                </li>
+                <li>
+                  <span class="uk-text-bold">Wind Speed:</span> {{wind}} kmph
+                </li>
+                <li><span class="uk-text-bold"> Pressure:</span> {{p}} hPa</li>
+                <li><span class="uk-text-bold">Humidity:</span> {{hum}} %</li>
+              </ul>
+            </div>
+            <div class="uk-card-footer">
+              <a href="{% url 'home' %}" class="uk-button uk-button-text"
+                >Back</a
+              >
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      const current_city = "{{name}}";
+      let recents = JSON.parse(localStorage.getItem("recents"));
+
+      if (!recents || recents.length === 0) {
+        localStorage.setItem("recents", JSON.stringify([current_city]));
+      } else {
+        const new_cities = recents.filter((c) => c !== current_city);
+        new_cities.unshift(current_city);
+        localStorage.setItem("recents", JSON.stringify(new_cities));
+      }
+    </script>
+  </body>
+</html>

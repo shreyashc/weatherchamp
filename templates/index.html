@@ -1,61 +1,98 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'images/favicon.ico' %}"
+    />
+    <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index_styles.css' %}" />
+    <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
+    <script src="{% static 'uikit/js/uikit-icons.min.js' %}"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Champ</title>
-</head>
-<body>
-    <nav class="nav">
-        <div class="nav-left">
-            <div class="logo">
-                <a href="">
-                    <i class="fas fa-heading"></i>
-                    <i class="fab fa-cuttlefish"></i>
-                </a>
-            </div>
-
-        </div>
-        <div class="nav-middle">
-            <span class="weather">Weather</span>
-            <span class="champ">Champ</span>           
-        </div>
-        <div class="nav-right">
-            <a href="" target="_blank">
-                <i class="fas fa-cloud-sun-rain"></i>            
-            </a>
-           
-        </div>
+  </head>
+  <body>
+    <nav class="uk-navbar-container" uk-navbar>
+      <div class="uk-navbar-center">
+        <a class="uk-navbar-item uk-logo">Weather Champ</a>
+      </div>
     </nav>
-
-
-    <form action="wth" id="frm"> 
-        <input type="text" placeholder="Enter Your City" name='c_name'> <br>
-        <div class="sub">
-            <a id="txt" class="cross_line" href="javascript:{}" onclick="document.getElementById('frm').submit(); return false;">
-                Search
-            </a>
+    <main class="uk-padding">
+      <div class="uk-container uk-container-small">
+        <form action="weather" class="uk-animation-slide-top">
+          <div uk-grid class="uk-width-expand@s">
+            <input
+              class="uk-input uk-form-large uk-width-expand"
+              type="text"
+              name="city_name"
+              placeholder="City name"
+            />
+            <button
+              class="uk-button uk-button-large btn-search uk-width-auto@m"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+        <div class="recent">
+          <h3 class="uk-text-center">Recent searches</h3>
+          <div class="uk-animation-slide-bottom-medium">
+            <ul class="uk-list uk-list-large uk-list-divider recents-list"></ul>
+          </div>
         </div>
-    </form>
-    
-    <div class="loader">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      </div>
+    </main>
+    <footer>
+      <p class="footer-heart">
+        Made with
+        <g-emoji
+          class="g-emoji"
+          alias="heart"
+          fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png"
+        >
+          <img
+            class="emoji"
+            alt="heart"
+            height="20"
+            width="20"
+            src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png"
+        /></g-emoji>
+        by
+        <a href="https://github.com/shreyashc" target="_blank">Shreyas H C</a>
+      </p>
+    </footer>
+    <script>
+      (function () {
+        let recents = JSON.parse(localStorage.getItem("recents"));
+        if (!recents || recents.length === 0) {
+          return;
+        }
+        const recents_ul = document.querySelector(".recents-list");
 
-    </div>
-   
-</body>
-<footer>
-   
-    <p> <i class="far fa-envelope"></i> <a href="shreyashc018@gmail.com">
-        shreyashc018@gmail.com</a></p>
-  </footer>
-
-
+        for (city of recents) {
+          let city_li = document.createElement("li");
+          let city_a = document.createElement("a");
+          const url = "{% url 'weather' %}" + "?city_name=" + city;
+          city_a.href = url;
+          city_a.text = city;
+          city_a.classList.add("uk-link-muted");
+          city_li.appendChild(city_a);
+          recents_ul.appendChild(city_li);
+        }
+        let clearBtn = document.createElement("button");
+        clearBtn.innerHTML = "Clear";
+        clearBtn.classList.add("uk-button", "uk-button-default", "btn-clear");
+        clearBtn.onclick = () => {
+          localStorage.clear();
+          location.reload();
+        };
+        const recentContainer = document.querySelector(".recent");
+        recentContainer.appendChild(clearBtn);
+      })();
+    </script>
+  </body>
 </html>
