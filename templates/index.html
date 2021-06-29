@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'uikit/css/uikit.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/index_styles.css' %}" />
     <script src="{% static 'uikit/js/uikit.min.js' %}"></script>
-    <script src="{% static 'uikit/js/uikit-icons.min.js' %}"></script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Champ</title>
@@ -32,7 +32,7 @@
               placeholder="City name"
             />
             <button
-              class="uk-button uk-button-large btn-search uk-width-auto@m"
+              class="uk-button uk-button-default uk-button-large btn-search uk-width-auto@m"
             >
               Search
             </button>
@@ -40,6 +40,7 @@
         </form>
         <div class="recent">
           <h3 class="uk-text-center">Recent searches</h3>
+          <div class="clear-all-container"></div>
           <div class="uk-animation-slide-bottom-medium">
             <ul class="uk-list uk-list-large uk-list-divider recents-list"></ul>
           </div>
@@ -62,7 +63,7 @@
             src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png"
         /></g-emoji>
         by
-        <a href="https://github.com/shreyashc" target="_blank">Shreyas H C</a>
+        <a href="https://github.com/shreyashc" target="_blank">Shreyas HC</a>
       </p>
     </footer>
     <script>
@@ -85,13 +86,19 @@
         }
         let clearBtn = document.createElement("button");
         clearBtn.innerHTML = "Clear";
-        clearBtn.classList.add("uk-button", "uk-button-default", "btn-clear");
+        clearBtn.classList.add(
+          "uk-button",
+          "uk-button-default",
+          "uk-button-small",
+          "btn-clear"
+        );
         clearBtn.onclick = () => {
           localStorage.clear();
           location.reload();
         };
-        const recentContainer = document.querySelector(".recent");
-        recentContainer.appendChild(clearBtn);
+
+        const clearContainer = document.querySelector(".clear-all-container");
+        clearContainer.appendChild(clearBtn);
       })();
     </script>
   </body>

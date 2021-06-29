@@ -2,22 +2,22 @@
 .btn-clear {
   transition: all 0.4s ease-in-out;
 }
+
+.btn-search {
+  background: #efefef;
+}
 .btn-search:hover,
 .btn-clear:hover {
   color: #fff;
   background: #495057;
 }
 
-.btn-clear {
-  float: right;
+.clear-all-container {
+  display: flex;
 }
 
-.btn-clear::after {
-  content: ".";
-  visibility: hidden;
-  display: block;
-  height: 0;
-  clear: both;
+.btn-clear {
+  margin-left: auto;
 }
 
 .uk-grid {
@@ -27,9 +27,16 @@
 .recent {
   margin-top: 5rem;
 }
-
+.recents-list {
+  margin-bottom: 6rem;
+}
 .footer-heart {
   text-align: center;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
 }
 
 footer {
@@ -43,7 +50,7 @@ footer {
 .footer-heart a {
   border-bottom: 1px solid #453886;
   color: #453886;
-  padding-bottom: 0.25em;
+  padding-bottom: 8px;
   text-decoration: none;
 }
 
@@ -54,10 +61,15 @@ footer {
   background-repeat: repeat-x;
   background-size: 20%;
   border-bottom: 0;
-  padding-bottom: 0.3em;
   text-decoration: none;
 }
 
 .emoji {
   vertical-align: middle;
+}
+
+* + .uk-grid-margin,
+.uk-grid + .uk-grid,
+.uk-grid > .uk-grid-margin {
+  margin-top: 10px;
 }
